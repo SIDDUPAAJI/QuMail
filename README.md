@@ -39,3 +39,20 @@ Developing this client involved several technical hurdles. Below is a summary of
 1. **Clone the repository:**
    ```bash
    git clone [https://github.com/SIDDUPAAJI/QuMail.git](https://github.com/SIDDUPAAJI/QuMail.git)
+Open in Visual Studio: Open the .sln file located in the root folder.
+
+Build and Run: Press F5 to compile and launch the application.
+
+Developed by SIDDUPAAJI
+
+
+---
+
+### 2. The Terminal Commands
+Once you have saved the file above, copy and paste these lines into your **Command Prompt** or **PowerShell** to upload it to GitHub:
+
+```powershell
+cd C:\Users\sidde\Downloads\QuMailClient
+git add README.md
+git commit -m "Add professional README without emojis"
+git push origin main
