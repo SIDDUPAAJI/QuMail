@@ -1,0 +1,126 @@
+﻿<Window x:Class="QuMailClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="QuMail // Secure Communication Terminal" Height="700" Width="1100"
+        WindowStartupLocation="CenterScreen" Background="#121417">
+
+    <Window.Resources>
+        <Style x:Key="StealthButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#7A869A"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#1C1F26"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StealthTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="#121417"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#2D323E"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CaretBrush" Value="#3D7BFF"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#181A20" BorderBrush="#2D323E" BorderThickness="0,0,1,0">
+            <Grid Margin="15,40,15,15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="QUMAIL" Foreground="White" FontSize="22" FontWeight="Black" Margin="20,0,0,40" />
+
+                <StackPanel Grid.Row="1">
+                    <Button Content="New Message" Style="{StaticResource StealthButtonStyle}" Foreground="#3D7BFF"/>
+                    <Button Content="Inbox" Style="{StaticResource StealthButtonStyle}" Click="BtnInbox_Click"/>
+                    <Button Content="Encrypted Outbox" Style="{StaticResource StealthButtonStyle}" Click="BtnOutbox_Click"/>
+                    <Separator Background="#2D323E" Margin="10,20"/>
+                    <Button Content="Key Configuration" Style="{StaticResource StealthButtonStyle}" Click="BtnConfig_Click"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="TERMINAL LOG" Foreground="#4A5568" FontSize="10" FontWeight="Bold" Margin="10,0,0,8"/>
+                    <Border Background="#090A0C" CornerRadius="4" Height="200" BorderBrush="#2D323E" BorderThickness="1">
+                        <RichTextBox x:Name="rtbTerminal" Background="Transparent" BorderThickness="0" IsReadOnly="True" VerticalScrollBarVisibility="Auto">
+                            <FlowDocument>
+                                <Paragraph x:Name="paraLog" FontFamily="Consolas" FontSize="10" Foreground="#00FF00" LineHeight="1.2"/>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </Border>
+                    <Button Content="Run Diagnostics" Style="{StaticResource StealthButtonStyle}" Click="BtnDiagnostics_Click" Margin="0,10,0,0" FontSize="11" Foreground="#3D7BFF"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1" Margin="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,30">
+                <TextBlock Text="SECURE COMPOSE" Foreground="White" FontSize="18" FontWeight="Bold"/>
+                <TextBlock x:Name="lblStatus" Text="Encryption Status: Ready" Foreground="#3D7BFF" FontSize="11" Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <Border Grid.Row="1" Background="#1C1F26" CornerRadius="10" Padding="30" BorderBrush="#2D323E" BorderThickness="1">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <StackPanel>
+                        <TextBlock Text="RECIPIENT" Foreground="#7A869A" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                        <TextBox x:Name="TxtRecipient" Style="{StaticResource StealthTextBoxStyle}" Margin="0,0,0,20"/>
+
+                        <TextBlock Text="SUBJECT" Foreground="#7A869A" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                        <TextBox x:Name="TxtSubject" Style="{StaticResource StealthTextBoxStyle}" Margin="0,0,0,20"/>
+
+                        <TextBlock Text="SECURITY PROTOCOL" Foreground="#7A869A" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                        <ComboBox x:Name="ComboSecurityLevel" SelectedIndex="1" Height="40" Margin="0,0,0,20" VerticalContentAlignment="Center">
+                            <ComboBoxItem Content="Quantum OTP (Level 1)"/>
+                            <ComboBoxItem Content="Quantum AES-256 (Level 2)"/>
+                            <ComboBoxItem Content="Post-Quantum Hybrid (Level 3)"/>
+                            <ComboBoxItem Content="Standard Email (Level 4)"/>
+                        </ComboBox>
+
+                        <TextBlock Text="MESSAGE PAYLOAD" Foreground="#7A869A" FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                        <TextBox x:Name="TxtBody" Style="{StaticResource StealthTextBoxStyle}" Height="200" AcceptsReturn="True" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <Button Grid.Row="2" Content="SEND ENCRYPTED" HorizontalAlignment="Right" Margin="0,20,0,0" Padding="35,14" Background="#3D7BFF" Foreground="White" FontWeight="Bold" Click="BtnSend_Click" BorderThickness="0" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

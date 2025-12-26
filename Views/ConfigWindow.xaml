@@ -1,0 +1,42 @@
+﻿<Window x:Class="QuMailClient.ConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Identity &amp; Key Configuration" Height="450" Width="400" 
+        WindowStartupLocation="CenterOwner" Background="#121417"
+        BorderBrush="#2D323E" BorderThickness="1">
+
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="TERMINAL CONFIGURATION" Foreground="White" FontSize="18" FontWeight="Bold"/>
+            <TextBlock Text="Set your secure transmission identity" Foreground="#7A869A" FontSize="11"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="GMAIL ADDRESS" Foreground="#3D7BFF" FontSize="10" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBox x:Name="TxtEmail" Background="#1C1F26" Foreground="White" BorderBrush="#2D323E" Padding="8" Margin="0,0,0,20" CaretBrush="#3D7BFF"/>
+
+            <TextBlock Text="GOOGLE APP PASSWORD" Foreground="#3D7BFF" FontSize="10" FontWeight="Bold" Margin="0,0,0,5"/>
+            <PasswordBox x:Name="TxtPassword" Background="#1C1F26" Foreground="White" BorderBrush="#2D323E" Padding="8" Margin="0,0,0,5" CaretBrush="#3D7BFF"/>
+            <TextBlock Text="Requires 16-character code from Google Security" Foreground="#4A5568" FontSize="9" Margin="0,0,0,20"/>
+
+            <Separator Background="#2D323E" Margin="0,10"/>
+
+            <TextBlock Text="KMS NODE STATUS" Foreground="#7A869A" FontSize="10" FontWeight="Bold" Margin="0,15,0,5"/>
+            <StackPanel Orientation="Horizontal">
+                <Ellipse Width="8" Height="8" Fill="#00FF41" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                <TextBlock Text="SECURE CONNECTION ACTIVE (Localhost:7001)" Foreground="#00FF41" FontSize="11"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="CANCEL" Click="BtnCancel_Click" Background="Transparent" Foreground="#7A869A" BorderThickness="0" Margin="0,0,20,0" Cursor="Hand"/>
+            <Button Content="SAVE IDENTITY" Click="BtnSave_Click" Background="#3D7BFF" Foreground="White" FontWeight="Bold" Padding="20,10" BorderThickness="0" Cursor="Hand"/>
+        </StackPanel>
+    </Grid>
+</Window>
