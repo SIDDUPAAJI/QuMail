@@ -24,39 +24,9 @@ QuMail represents a significant shift from "computational security" (which relie
 
 2. Database Schema for the Simulated Key ManagerA simulated Key Manager doesn't just "store" keys; it must track their lifecycle, which "SAE" (Secure Application Entity) they belong to, and whether they've been used.
 
-[ USER A: ALICE ]                       [ USER B: BOB ]
-      +---------------+                       +---------------+
-      |    QuMail     |                       |    QuMail     |
-      | (Desktop App) |                       | (Desktop App) |
-      +-------+-------+                       +-------+-------+
-              |                                       |
-    (1) Fetch | (2) Get Key                 (5) Fetch | (6) Get Key
-    Quantum   | & Key_ID                    Matching  | via Key_ID
-    Key       |                             Key       |
-              v                                       v
-      +-------+---------------------------------------+-------+
-      |               SIMULATED KEY MANAGER (KM)              |
-      |        (ETSI GS QKD 014 REST API & Database)          |
-      +---------------------------+---------------------------+
-                                  |
-               +------------------+------------------+
-               |          DATABASE SCHEMA            |
-               | [Nodes] [KeyStore] [Streams] [Logs] |
-               +-------------------------------------+
-                                  |
-              ____________________|____________________
-             /                                         \
-    (3) ENCRYPT MESSAGE                      (7) DECRYPT MESSAGE
-    [AES-256 or OTP]                         [Match Key_ID]
-             \____________________   __________________/
-                                  | |
-                                  v v
-                      +-----------+-----------+
-                      |  CLASSICAL INTERNET   |
-                      | (SMTP / IMAP SERVERS) |
-                      +-----------------------+
-                (4) Encrypted Email + Key_ID Sent
-   
+<img width="1024" height="1024" alt="Gemini_Generated_Image_13qrmr13qrmr13qr" src="https://github.com/user-attachments/assets/eda7dad9-eca2-4fa0-b9f6-648eb34d00f0" />
+
+
 A. High-Level System Architecture
 The diagram above illustrates how the QuMail client interacts with both the simulated Key Manager and the traditional Email Server.
 Component Breakdown:
