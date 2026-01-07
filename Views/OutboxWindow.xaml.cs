@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 
 namespace QuMailClient
 {
@@ -8,28 +8,18 @@ namespace QuMailClient
         {
             InitializeComponent();
 
-            // Call the loading method as soon as the window initializes
+            // DO NOT call ClearHistory here anymore.
+            // Just refresh to show whatever has been sent in THIS session.
             RefreshOutbox();
         }
 
-        /// <summary>
-        /// Pulls the latest encrypted history from the OutboxManager and 
-        /// binds it to the DataGrid.
-        /// </summary>
         public void RefreshOutbox()
         {
-            // 1. Fetch the decrypted history from local storage
+            // This pulls the current session's history from outbox.dat
             var entries = OutboxManager.LoadEntries();
 
-            // 2. Bind the list to the DataGrid's ItemsSource
+            // Bind to the DataGrid
             DgHistory.ItemsSource = entries;
-
-            // 3. (Optional) Provide feedback if the history is empty
-            if (entries == null || entries.Count == 0)
-            {
-                // Terminal-style notice
-                // This matches the logic from your MainWindow diagnostics
-            }
         }
     }
 }
